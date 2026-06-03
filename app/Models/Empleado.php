@@ -9,4 +9,8 @@ class Empleado extends Model
 {
     /** @use HasFactory<\Database\Factories\EmpleadoFactory> */
     use HasFactory;
+    public function cargo()
+    {
+        return $this->belongsTo(Cargo::class, 'id_cargo');
+    }
 }
