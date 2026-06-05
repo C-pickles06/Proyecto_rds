@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('funciones_cargos', function (Blueprint $table) {
             $table->id();
             $table->string('descripcion_function');
-            $table->string('estado');
+            $table->enum('estado',['Activo','Inactivo'])->default('Activo');
             $table->timestamps();
         });
     }

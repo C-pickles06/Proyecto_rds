@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('fecha_nacimiento');
             $table->date('fecha_ingreso');
             $table->float('salario');
+            $table->enum('estado',['activo','inactivo'])->default('activo');
             $table->foreignId('id_cargo');
             $table->timestamps();
         });
