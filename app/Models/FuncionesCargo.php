@@ -10,7 +10,7 @@ class FuncionesCargo extends Model
 {
     /** @use HasFactory<\Database\Factories\FuncionesCargoFactory> */
     use HasFactory;
-    public function cargo()
+    public function cargo(): BelongsTo
     {
         return $this->belongsTo(Cargo::class,'id_cargo');
     }

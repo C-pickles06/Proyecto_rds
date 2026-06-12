@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Empleado;
 use App\Models\FuncionesCargo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FuncionesCargoController extends Controller
 {
@@ -12,7 +14,9 @@ class FuncionesCargoController extends Controller
      */
     public function index()
     {
-        //
+        $empleado = Empleado::all();
+
+        return response()->json($empleado,200);
     }
 
     /**
@@ -28,7 +32,34 @@ class FuncionesCargoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = validator::make($request->all(),[
+            'descripcion_funcion'=>'required',
+            'estado'=>'required',
+        ]);
+        if($validator->fails()){
+            $data=[
+                'message'=> 'error en la validacion de los datos',
+                'errors'=>$validator->errors(),
+                'status'=>'400'
+            ];
+            return response()->json($data,400);
+        }
+        $funcionesCargo=FuncionesCargo::create([
+            'descripcion_funcion'=>$request->descripcion_funcion,
+            'estado'=>$request->estado,
+        ]);
+        if(!$funcionesCargo){
+            $data=[
+                'message'=> 'error en la validacion de los datos',
+                'estatus'=>500
+            ];
+            return response()->json($data,500);
+        }
+        $data=[
+            'cargo' =>$funcionesCargo,
+            'status'=>201
+        ];
+        return response()->json($data,201);
     }
 
     /**

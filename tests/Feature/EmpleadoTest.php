@@ -3,10 +3,15 @@
 use App\Models\Cargo;
 use App\Models\Empleado;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Sanctum\Sanctum;
+
 uses(RefreshDatabase::class);
 
 test('puede crear un empleado', function () {
-   $cargo = \App\Models\Cargo::factory()->create();
+    $usuario = \App\Models\User::factory()->create();
+    Sanctum::actingAs($usuario);
+
+    $cargo = \App\Models\Cargo::factory()->create();
 
     $datos = \App\Models\Empleado::factory()
         ->make([
@@ -23,59 +28,65 @@ test('puede crear un empleado', function () {
         'apellidos' => $datos['apellidos'],
         'id_cargo' => $cargo->id
     ]);
-    
 });
 test('puede ver los empleados ', function () {
-   $cargo = \App\Models\Cargo::factory()->create();
+    $usuario = \App\Models\User::factory()->create();
+    Sanctum::actingAs($usuario);
+
+    $cargo = \App\Models\Cargo::factory()->create();
 
     $datos = \App\Models\Empleado::factory()
         ->make([
             'cargo_id' => $cargo->id
         ])
         ->toArray();
-    
+
     $respuesta = $this->getJson('/api/empleados');
     $respuesta->assertStatus(200);
-    
-
-
-}); 
+});
 
 
 test('puede actualizar un empleado', function () {
-   $cargo= \App\Models\Cargo::factory()->create();
+
+    $usuario = \App\Models\User::factory()->create();
+    Sanctum::actingAs($usuario);
+
+    $cargo = \App\Models\Cargo::factory()->create();
 
     $datos = \App\Models\Empleado::factory()
         ->create([
             'id_cargo' => $cargo->id
         ]);
-    $empleado=[
+    $empleado = [
         'id_cargo' => $cargo->id,
-        'nombres'=>'juan andres',
-        'apellidos'=>'torres perez',
-        'fecha_nacimiento'=>'1999-12-12',
-        'fecha_ingreso'=>'2026-05-01',
-        'salario'=>'25000',
+        'nombres' => 'juan andres',
+        'apellidos' => 'torres perez',
+        'fecha_nacimiento' => '1999-12-12',
+        'fecha_ingreso' => '2026-05-01',
+        'salario' => '25000',
         'estado' => 'activo'
-        ];
-     $respuesta = $this->putJson(
+    ];
+    $respuesta = $this->putJson(
         "/api/empleados/{$datos->id}",
-        $empleado);
-        $respuesta->assertStatus(201);
-    
+        $empleado
+    );
+    $respuesta->assertStatus(201);
 });
 
 test('puede eliminar un empleado', function () {
-   $cargo= \App\Models\Cargo::factory()->create();
+    $usuario = \App\Models\User::factory()->create();
+    Sanctum::actingAs($usuario);
+
+    $cargo = \App\Models\Cargo::factory()->create();
 
     $datos = \App\Models\Empleado::factory()
         ->create([
             'id_cargo' => $cargo->id
         ]);
-    
-     $respuesta = $this->deleteJson(
-        "/api/empleados/{$datos->id}");
 
-        $respuesta->assertStatus(200);
-    
+    $respuesta = $this->deleteJson(
+        "/api/empleados/{$datos->id}"
+    );
+
+    $respuesta->assertStatus(200);
 });

@@ -2,17 +2,21 @@
 
 namespace Database\Seeders;
 
-use App\Models\Empleado;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
-class EmpleadoSeeder extends Seeder
+class TestUserSeed extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Empleado::factory(30)->create();
+        User::factory()->create([
+            'name'=>'admin',   
+            'email'=>'admin@example.com',
+            'password'=>bcrypt('123456')
+        ]);
     }
 }
