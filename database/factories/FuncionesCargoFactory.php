@@ -18,7 +18,8 @@ class FuncionesCargoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'descripcion_funcion'=>$this->faker->sentence(),
+            'estado'=> $this->faker->randomElement(['activo','inactivo'])
         ];
     }
 }

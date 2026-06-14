@@ -10,8 +10,14 @@ class FuncionesCargo extends Model
 {
     /** @use HasFactory<\Database\Factories\FuncionesCargoFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'descripcion_funcion',
+        'estado',
+    ];
+
     public function cargo(): BelongsTo
     {
-        return $this->belongsTo(Cargo::class,'id_cargo');
+        return $this->belongsTo(Cargo::class, 'id_cargo');
     }
 }

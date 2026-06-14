@@ -14,9 +14,9 @@ class FuncionesCargoController extends Controller
      */
     public function index()
     {
-        $empleado = Empleado::all();
+        $funcionesCargo = FuncionesCargo::all();
 
-        return response()->json($empleado,200);
+        return response()->json($funcionesCargo,200);
     }
 
     /**
@@ -83,7 +83,34 @@ class FuncionesCargoController extends Controller
      */
     public function update(Request $request, FuncionesCargo $funcionesCargo)
     {
-        //
+        $validator = validator::make($request->all(),[
+            'descripcion_funcion'=>'required',
+            'estado'=>'required',
+        ]);
+        if($validator->fails()){
+            $data=[
+                'message'=> 'error en la validacion de los datos',
+                'errors'=>$validator->errors(),
+                'status'=>'400'
+            ];
+            return response()->json($data,400);
+        }
+        $funcionesCargo->update([
+            'descripcion_funcion'=>$request->descripcion_funcion,
+            'estado'=>$request->estado,
+        ]);
+        if(!$funcionesCargo){
+            $data=[
+                'message'=> 'error en la validacion de los datos',
+                'estatus'=>500
+            ];
+            return response()->json($data,500);
+        }
+        $data=[
+            'cargo' =>$funcionesCargo,
+            'status'=>200
+        ];
+        return response()->json($data,200);
     }
 
     /**
@@ -91,6 +118,7 @@ class FuncionesCargoController extends Controller
      */
     public function destroy(FuncionesCargo $funcionesCargo)
     {
-        //
+        $funcionesCargo->delete();
+        return response()->json(['message'=>'eliminado con exito'],200);
     }
 }

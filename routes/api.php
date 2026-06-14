@@ -28,11 +28,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/cargos/{cargo}', [CargoController::class, 'update']);
     Route::delete('/cargos/{cargo}', [CargoController::class, 'destroy']);
 
-    Route::get('/funciones_cargo',[FuncionesCargoController::class, 'index']);
-    Route::post('/funciones_cargo',[FuncionesCargoController::class, 'store']);
-    Route::get('/funciones_cargo/{funciones_cargo}',[FuncionesCargoController::class, 'show']);
-    Route::put('/funciones_cargo/{funciones_cargo}',[FuncionesCargoController::class, 'update']);
-    Route::delete('/funciones_cargo/{funciones_cargo}',[FuncionesCargoController::class, 'destroy']);
+    Route::get('/funcionesCargo',[FuncionesCargoController::class, 'index']);
+    Route::post('/funcionesCargo',[FuncionesCargoController::class, 'store']);
+    Route::get('/funcionesCargo/{funcionesCargo}',[FuncionesCargoController::class, 'show']);
+    Route::put('/funcionesCargo/{funcionesCargo}',[FuncionesCargoController::class, 'update']);
+    Route::delete('/funcionesCargo/{funcionesCargo}',[FuncionesCargoController::class, 'destroy']);
 
     Route::get('/user',function(Request $request){
         return $request->user();
