@@ -3,8 +3,17 @@
 Antes de comenzar, asegúrate de tener listo tu entorno de desarrollo. Copia y pega el siguiente bloque completo en tu terminal para verificar todas las versiones de un solo golpe:
 
 ```bash
-php -v && composer -v && node -v && mysql --version
-
+php -v
+```
+```bash
+composer -v
+```
+```bash
+node -v
+```
+```bash
+mysql --version
+```
 ### 🛠️ ¿Te falta alguna herramienta?
 
 Si la terminal te arrojó un error con algún comando, significa que necesitas instalar esa herramienta específica de forma individual. Aquí tienes los enlaces oficiales para ponerte al día:
