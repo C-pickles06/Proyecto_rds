@@ -18,7 +18,7 @@ Route::post('register', [UserController::class, 'store']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/empleados', [EmpleadoController::class, 'index']);
     Route::post('/empleados', [EmpleadoController::class, 'store']);
-    Route::get('/empleados/{emppleado}', [EmpleadoController::class, 'show']);
+    Route::get('/empleados/{empleado}', [EmpleadoController::class, 'show']);
     Route::put('/empleados/{empleado}', [EmpleadoController::class, 'update']);
     Route::delete('/empleados/{empleado}', [EmpleadoController::class, 'destroy']);
 

@@ -1,6 +1,7 @@
 <?php
 use App\Models\FuncionesCargo;
 use App\Models\User;
+use App\Models\Cargo;
 use Laravel\Sanctum\Sanctum;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -18,10 +19,13 @@ test('puede ver una funcion', function () {
 test('puede crear una funcion',function(){
     $usuario = User::factory()->create();
     Sanctum::actingAs($usuario);
+    $cargo = Cargo::factory()->create();
+
 
     $datos = [
         'descripcion_funcion'=>'es un developer',  
         'estado'=>'activo',
+        'id_cargo' => $cargo->id,
     ];
     $respuesta = $this->postJson('/api/funcionesCargo',$datos);
     $respuesta->assertStatus(201);

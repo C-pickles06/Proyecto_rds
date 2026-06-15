@@ -35,6 +35,7 @@ class FuncionesCargoController extends Controller
         $validator = validator::make($request->all(),[
             'descripcion_funcion'=>'required',
             'estado'=>'required',
+            'id_cargo'=>'required',
         ]);
         if($validator->fails()){
             $data=[
@@ -47,11 +48,12 @@ class FuncionesCargoController extends Controller
         $funcionesCargo=FuncionesCargo::create([
             'descripcion_funcion'=>$request->descripcion_funcion,
             'estado'=>$request->estado,
+            'id_cargo'=>$request->id_cargo,
         ]);
         if(!$funcionesCargo){
             $data=[
-                'message'=> 'error en la validacion de los datos',
-                'estatus'=>500
+                'message'=> 'error en la creacion de la funcion',
+                'status'=>500
             ];
             return response()->json($data,500);
         }

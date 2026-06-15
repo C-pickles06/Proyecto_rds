@@ -78,7 +78,15 @@ class EmpleadoController extends Controller
      */
     public function show(Empleado $empleado)
     {
-        //
+        $empleado ->load('cargo.funcionesCargo');
+        $detalle=[
+            'nombre_empleado'=>$empleado->$empleado . $empleado->apellidos,
+            'cargo_asignado'=>$empleado->cargo ? $empleado->cargo->nombre_cargo : 'Sin cargo',
+            'salario' => $empleado->salario,
+            'funciones' => $empleado->cargo->funcionesCargo ? $empleado->cargo->funcionesCargo : [],
+            
+        ];
+        return response()->json($detalle,200);
     }
 
     /**

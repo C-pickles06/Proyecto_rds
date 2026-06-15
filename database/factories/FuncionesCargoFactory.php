@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-
+use App\Models\Cargo;
 use App\Models\FuncionesCargo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +19,8 @@ class FuncionesCargoFactory extends Factory
     {
         return [
             'descripcion_funcion'=>$this->faker->sentence(),
-            'estado'=> $this->faker->randomElement(['activo','inactivo'])
+            'estado'=> $this->faker->randomElement(['activo','inactivo']),
+            'id_cargo'=> \App\Models\Cargo::factory(),
         ];
     }
 }

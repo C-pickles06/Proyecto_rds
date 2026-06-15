@@ -14,6 +14,7 @@ class FuncionesCargo extends Model
     protected $fillable = [
         'descripcion_funcion',
         'estado',
+        'id_cargo',
     ];
 
     public function cargo(): BelongsTo

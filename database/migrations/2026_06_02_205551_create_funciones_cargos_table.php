@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('descripcion_funcion');
             $table->enum('estado',['activo','inactivo'])->default('activo');
+            $table->foreignId('id_cargo')->constrained('cargos')->cascadeOnDelete();
             $table->timestamps();
         });
     }
