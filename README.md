@@ -141,7 +141,7 @@ php artisan serve
 
 ```
 
-luego debemos de estar en la terminal de git bash usando el cliente url (cURL):
+1. debemos de estar en la terminal de git bash usando el cliente url (cURL) pasamos a loguearnos para obtener el token:
 
 ```bash
 curl -X POST http://localhost:8000/api/sesion -H "Accept: application/json" -H "Content-Type: application/json" -d '{"email":"admin@example.com","password":"123456"}'
@@ -151,10 +151,42 @@ curl -X POST http://localhost:8000/api/sesion -H "Accept: application/json" -H "
 Esta petición nos genera el un token:
 
 ```text
-1|lMTQUT4MPd0GAeBffvrrlUTUryagMrrEqEWOKpOu1b636d83
+2|rcQgYGXkcXdb2TepG7e76zpZvBToGnbazuEy99Id4f62a6c1
 
 ```
+2. corremos el siguiente comando para crear un nuevo cargo:
 
+```bash
+curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer 2|rcQgYGXkcXdb2TepG7e76zpZvBToGnbazuEy99Id4f62a6c1' -d '{"nombre_cargo":"Desarrollador Junior","descripcion":"Desarrollo de APIs con Laravel"}' http://127.0.0.1:8000/api/cargos
+```
+3. creamos una funcion para el ID #1:
+```bash
+curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer 2|rcQgYGXkcXdb2TepG7e76zpZvBToGnbazuEy99Id4f62a6c1' -d '{"descripcion_funcion":"Programar endpoints de la API","estado":"Activo","id_cargo":1}' http://127.0.0.1:8000/api/funcionesCargo
+```
+4. Crear un empleado asociado al cargo ID #1:
+```bash
+curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer 2|rcQgYGXkcXdb2TepG7e76zpZvBToGnbazuEy99Id4f62a6c1' -d '{"id_cargo":1,"nombres":"Carlos","apellidos":"Mendoza","fecha_nacimiento":"1995-04-12","fecha_ingreso":"2026-06-01","salario":28000,"estado":"activo"}' http://127.0.0.1:8000/api/empleados
+```
+5. Eliminar un empleado
+```bash
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer 2|rcQgYGXkcXdb2TepG7e76zpZvBToGnbazuEy99Id4f62a6c1' http://127.0.0.1:8000/api/empleados/2
 ```
 
+6. Sin que este validado el token:
+```bash
+curl -H 'Accept: application/json' http://127.0.0.1:8000/api/cargos
+```
+Nos lanza este error:
+```text
+{
+    "message": "Unauthenticated."
+}
+```
+7. Sin las validaciones de backend:
+```bash
+curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer 2|rcQgYGXkcXdb2TepG7e76zpZvBToGnbazuEy99Id4f62a6c1' -d '{"nombres":"Juan"}' http://127.0.0.1:8000/api/empleados
+```
+Nos lanza el siguiente error:
+```bash
+{"message":"error en la validacion de los datos","errors":{"id_cargo":["The id cargo field is required."],"nombres":["The nombres field is required."],"apellidos":["The apellidos field is required."],"fecha_nacimiento":["The fecha nacimiento field is required."],"fecha_ingreso":["The fecha ingreso field is required."],"salario":["The salario field is required."],"estado":["The estado field is required."]},"status":"400"}
 ```
