@@ -25,9 +25,15 @@ node -v
 mysql --version
 ```
 
+<<<<<<< HEAD
 ## Clonación y Configuración del Proyecto
 
 Clonar el repositorio:
+=======
+## 👥 Clonación y Configuración del Proyecto
+
+Despues de hacer el pequeño paréntesis de las herramientas se debe de clonar el repositorio con el comando:
+>>>>>>> b8d7515b8fcb463ae0fc0f463cffb34405ac4bb0
 
 ```bash
 git clone git@github.com:C-pickles06/Proyecto_rds.git
@@ -124,7 +130,18 @@ php artisan test
 php artisan serve
 ```
 
+<<<<<<< HEAD
 La API quedará disponible en:
+=======
+1. debemos de estar en la terminal de git bash usando el cliente url (cURL) pasamos a loguearnos para obtener el token:
+
+```bash
+curl -X POST http://localhost:8000/api/login -H "Accept: application/json" -H "Content-Type: application/json" -d '{"email":"admin@example.com","password":"123456"}'
+
+```
+
+Esta petición nos genera el un token:
+>>>>>>> b8d7515b8fcb463ae0fc0f463cffb34405ac4bb0
 
 ```text
 http://127.0.0.1:8000
