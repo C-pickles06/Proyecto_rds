@@ -14,43 +14,6 @@ node -v
 ```bash
 mysql --version
 ```
-### 🛠️ ¿Te falta alguna herramienta?
-
-Si la terminal te arrojó un error con algún comando, significa que necesitas instalar esa herramienta específica de forma individual. Aquí tienes los enlaces oficiales para ponerte al día:
-
-1. **PHP:** Descárgalo desde el sitio oficial [php.net/downloads](https://www.php.net/downloads) e intégralo a las variables de entorno de tu sistema.
-2. **Composer:** Descarga el instalador oficial para gestionar las dependencias de backend desde [getcomposer.org](https://getcomposer.org/).
-3. **Node.js & NPM:** Descarga la versión recomendada (LTS) desde [nodejs.org](https://nodejs.org/), la cual ya incluye NPM automáticamente.
-4. **MySQL:** Descarga el servidor y las herramientas de consola desde [dev.mysql.com/downloads](https://dev.mysql.com/downloads/).
-
----
-
-> ⚠️ **Importante:** Después de instalar cualquiera de estas herramientas, asegúrate de **reiniciar tu terminal** o tu editor de código para que el sistema reconozca los nuevos comandos.
-
-```markdown
-## 🚀 Verificación Rápida de Herramientas
-
-Antes de comenzar, asegúrate de tener listo tu entorno de desarrollo. Copia y pega el siguiente bloque completo en tu terminal para verificar todas las versiones de un solo golpe:
-
-```bash
-php -v && node -v && composer -v && mysql --version
-
-```
-
-### 🛠️ ¿Te falta alguna herramienta?
-
-Si la terminal te arrojó un error con algún comando, significa que necesitas instalar esa herramienta específica de forma individual. Aquí tienes los enlaces oficiales para ponerte al día:
-
-1. **PHP:** Descárgalo desde el sitio oficial [php.net/downloads](https://www.php.net/downloads) e intégralo a las variables de entorno de tu sistema.
-2. **Composer:** Descarga el instalador oficial para gestionar las dependencias de backend desde [getcomposer.org](https://getcomposer.org/).
-3. **Node.js & NPM:** Descarga la versión recomendada (LTS) desde [nodejs.org](https://nodejs.org/), la cual ya incluye NPM automáticamente.
-4. **MySQL:** Descarga el servidor y las herramientas de consola desde [dev.mysql.com/downloads](https://dev.mysql.com/downloads/).
-
----
-
-> ⚠️ **Importante:** Después de instalar cualquiera de estas herramientas, asegúrate de **reiniciar tu terminal** o tu editor de código para que el sistema reconozca los nuevos comandos.
-
----
 
 ## 👥 Clonación y Configuración del Proyecto
 
