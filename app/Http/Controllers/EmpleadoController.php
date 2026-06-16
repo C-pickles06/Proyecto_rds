@@ -50,6 +50,19 @@ class EmpleadoController extends Controller
         ];
         return response()->json($data,400);
        }
+
+       $existeEmpleado = Empleado::where('nombres', $request->nombres)
+        ->where('apellidos', $request->apellidos)
+        ->where('fecha_nacimiento', $request->fecha_nacimiento)
+        ->exists();
+
+    if ($existeEmpleado) {
+        return response()->json([
+            'message' => 'El empleado ya se encuentra registrado',
+            'status' => 400
+        ], 400);
+    }
+
        $empleado=Empleado::create([
             'id_cargo'=>$request->id_cargo,
             'nombres'=>$request->nombres,
