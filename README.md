@@ -1,69 +1,59 @@
-Claro. Con base en la foto y en lo que vi de tu proyecto, tu README podría quedar así:
+## 🚀 Verificación Rápida de Herramientas
 
-```md
-# Proyecto RDS - API de Empleados, Cargos y Funciones
-
-Este proyecto es una API desarrollada con Laravel para administrar empleados, cargos y funciones asociadas a cada cargo. La API usa autenticación con Laravel Sanctum, por lo que las rutas principales deben consumirse enviando un token Bearer.
-
-## Verificación Rápida de Herramientas
-
-Antes de comenzar, verifica que tengas instaladas las herramientas necesarias:
+Antes de comenzar, asegúrate de tener listo tu entorno de desarrollo. Copia y pega el siguiente bloque completo en tu terminal para verificar todas las versiones de un solo golpe:
 
 ```bash
 php -v
 ```
-
 ```bash
 composer -v
 ```
-
 ```bash
 node -v
 ```
-
 ```bash
 mysql --version
 ```
 
-<<<<<<< HEAD
-## Clonación y Configuración del Proyecto
-
-Clonar el repositorio:
-=======
 ## 👥 Clonación y Configuración del Proyecto
 
 Despues de hacer el pequeño paréntesis de las herramientas se debe de clonar el repositorio con el comando:
->>>>>>> b8d7515b8fcb463ae0fc0f463cffb34405ac4bb0
 
 ```bash
 git clone git@github.com:C-pickles06/Proyecto_rds.git
+
 ```
 
-Entrar a la carpeta del proyecto:
+Despues de haber clonado nuestro repositorio con exito debemos de acceder a la ruta de donde clonamos el repositorio:
+ejmeplo:
 
 ```bash
 cd "C:\Users\cesar\Desktop\Proyecto_rds"
+
 ```
 
-Instalar dependencias de Laravel:
+Ejecutar el comando del instalador de dependencias:
 
 ```bash
 composer install
+
 ```
 
-Instalar dependencias de Node:
+Ejecutar el comando de instalacion del manejador del instalador de paquetes:
 
 ```bash
 npm install
+
 ```
 
-Crear el archivo de entorno:
+Ahora nuestro siguiente paso es configurar nuestras credenciales de acceso y nuestra base de datos ejecutando el siguiente comando:
 
 ```bash
 cp .env.example .env
+
 ```
 
-Configurar la base de datos en `.env`:
+Dentro del IDE(entorno de desarrollo) debemos de abrir el repositorio que clonamos y ir al archivo .env.example y editar la configuración de la base de datos
 
 ```env
 DB_CONNECTION=mysql
@@ -72,67 +62,57 @@ DB_PORT=3306
 DB_DATABASE=db_3066552
 DB_USERNAME=root
 DB_PASSWORD=1234
+
 ```
 
-Importante: estos datos dependen de cómo tengas configurado MySQL en tu equipo.
+> 💡 **Importante:** La configuracion de la base de datos va de acuerdo a como tengas configurado tus credenciales en mysql, yo solo te estoy proporcionando un ejemplo de cuales podrían ser las credenciales
 
-Generar la llave de la aplicación:
+Luego debemos de ejecutar el comando:
 
 ```bash
 php artisan key:generate
+
 ```
 
-Crear la base de datos:
+Ahora debemos de crear la base de datos en nuestro motor de base de datos:
 
 ```sql
 CREATE DATABASE db_3066552;
+
 ```
 
-Ejecutar migraciones:
+Enviar las migraciones ejecutando el comando:
 
 ```bash
 php artisan migrate
+
 ```
 
-Poblar la base de datos:
+Poblar la base de datos ejecutando el comando:
 
 ```bash
 php artisan db:seed
+
 ```
 
-## Datos de Prueba
+---
 
-Al ejecutar los seeders, el proyecto crea datos iniciales para probar la API:
+## 🧪 Pruebas
 
-- 30 empleados
-- 40 cargos
-- 5 funciones de cargo
-- 1 usuario administrador para generar token
-
-Credenciales del usuario administrador:
-
-```text
-email: admin@example.com
-password: 123456
-```
-
-Nota: en la evidencia se menciona “5 funciones por cargo”. Actualmente el proyecto crea 5 funciones en total. Si se necesita cumplir exactamente ese punto, el seeder de funciones debe generar 5 funciones para cada cargo.
-
-## Ejecutar Pruebas Automáticas
+Primera prueba (ejecutar los test):
 
 ```bash
 php artisan test
+
 ```
 
-## Levantar el Servidor
+Generar los tokens, primero debemos de levantar el servidor:
 
 ```bash
 php artisan serve
+
 ```
 
-<<<<<<< HEAD
-La API quedará disponible en:
-=======
 1. debemos de estar en la terminal de git bash usando el cliente url (cURL) pasamos a loguearnos para obtener el token:
 
 ```bash
@@ -141,202 +121,44 @@ curl -X POST http://localhost:8000/api/login -H "Accept: application/json" -H "C
 ```
 
 Esta petición nos genera el un token:
->>>>>>> b8d7515b8fcb463ae0fc0f463cffb34405ac4bb0
 
 ```text
-http://127.0.0.1:8000
+2|rcQgYGXkcXdb2TepG7e76zpZvBToGnbazuEy99Id4f62a6c1
+
 ```
-
-## Autenticación
-
-Para consumir las rutas protegidas se debe iniciar sesión y obtener un token:
+2. corremos el siguiente comando para crear un nuevo cargo:
 
 ```bash
-curl -X POST http://127.0.0.1:8000/api/login -H 'Accept: application/json' -H 'Content-Type: application/json' -d '{"email":"admin@example.com","password":"123456"}'
+curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer 2|rcQgYGXkcXdb2TepG7e76zpZvBToGnbazuEy99Id4f62a6c1' -d '{"nombre_cargo":"Desarrollador Junior","descripcion":"Desarrollo de APIs con Laravel"}' http://127.0.0.1:8000/api/cargos
 ```
-
-La respuesta será un token similar a este:
-
-```text
-2|TOKEN_GENERADO_POR_SANCTUM
-```
-
-En los siguientes ejemplos reemplaza `TU_TOKEN` por el token generado.
-
-## Pruebas con cURL
-
-### Listar Empleados
-
+3. creamos una funcion para el ID #1:
 ```bash
-curl -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' http://127.0.0.1:8000/api/empleados
+curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer 2|rcQgYGXkcXdb2TepG7e76zpZvBToGnbazuEy99Id4f62a6c1' -d '{"descripcion_funcion":"Programar endpoints de la API","estado":"Activo","id_cargo":1}' http://127.0.0.1:8000/api/funcionesCargo
 ```
-
-### Listar Cargos
-
+4. Crear un empleado asociado al cargo ID #1:
 ```bash
-curl -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' http://127.0.0.1:8000/api/cargos
+curl -X POST -H 'Content-Type: application/json' -H 'Authorization: Bearer 2|rcQgYGXkcXdb2TepG7e76zpZvBToGnbazuEy99Id4f62a6c1' -d '{"id_cargo":1,"nombres":"Carlos","apellidos":"Mendoza","fecha_nacimiento":"1995-04-12","fecha_ingreso":"2026-06-01","salario":28000,"estado":"activo"}' http://127.0.0.1:8000/api/empleados
 ```
-
-### Listar Funciones de Cargo
-
+5. Eliminar un empleado
 ```bash
-curl -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' http://127.0.0.1:8000/api/funcionesCargo
+curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer 2|rcQgYGXkcXdb2TepG7e76zpZvBToGnbazuEy99Id4f62a6c1' http://127.0.0.1:8000/api/empleados/2
 ```
 
-### Crear Cargo
-
-```bash
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' -d '{"nombre_cargo":"Desarrollador Junior","descripcion":"Desarrollo de APIs con Laravel"}' http://127.0.0.1:8000/api/cargos
-```
-
-### Actualizar Cargo
-
-```bash
-curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' -d '{"nombre_cargo":"Desarrollador Senior","descripcion":"Lider técnico de APIs con Laravel"}' http://127.0.0.1:8000/api/cargos/1
-```
-
-### Eliminar Cargo
-
-```bash
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' http://127.0.0.1:8000/api/cargos/2
-```
-
-### Crear Función de Cargo
-
-```bash
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' -d '{"descripcion_funcion":"Programar endpoints de la API","estado":"Activo","id_cargo":1}' http://127.0.0.1:8000/api/funcionesCargo
-```
-
-### Actualizar Función de Cargo
-
-```bash
-curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' -d '{"descripcion_funcion":"Diseñar arquitectura del sistema","estado":"Activo"}' http://127.0.0.1:8000/api/funcionesCargo/1
-```
-
-### Eliminar Función de Cargo
-
-```bash
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' http://127.0.0.1:8000/api/funcionesCargo/2
-```
-
-### Crear Empleado
-
-```bash
-curl -X POST -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' -d '{"id_cargo":1,"nombres":"Carlos","apellidos":"Mendoza","fecha_nacimiento":"1995-04-12","fecha_ingreso":"2026-06-01","salario":28000,"estado":"activo"}' http://127.0.0.1:8000/api/empleados
-```
-
-### Detalle de Empleado
-
-Este endpoint muestra el detalle del empleado, incluyendo cargo asignado, salario y funciones del cargo:
-
-```bash
-curl -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' http://127.0.0.1:8000/api/empleados/1
-```
-
-### Actualizar Empleado
-
-```bash
-curl -X PUT -H 'Content-Type: application/json' -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' -d '{"id_cargo":1,"nombres":"Carlos Andres","apellidos":"Mendoza Perez","fecha_nacimiento":"1995-04-12","fecha_ingreso":"2026-06-01","salario":35000,"estado":"activo"}' http://127.0.0.1:8000/api/empleados/1
-```
-
-### Eliminar Empleado
-
-```bash
-curl -X DELETE -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' http://127.0.0.1:8000/api/empleados/2
-```
-
-## Prueba sin Token
-
-Si se intenta consumir una ruta protegida sin enviar token:
-
+6. Sin que este validado el token:
 ```bash
 curl -H 'Accept: application/json' http://127.0.0.1:8000/api/cargos
 ```
-
-La API responde:
-
-```json
-{
-  "message": "Unauthenticated."
-}
-```
-
-Esto confirma que no se pueden crear, listar, actualizar o eliminar empleados, cargos o funciones si el usuario no está autenticado.
-
-## Prueba de Validaciones
-
-Ejemplo de intento incorrecto al crear un empleado, enviando solo el nombre:
-
-```bash
-curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer TU_TOKEN' -d '{"nombres":"Juan"}' http://127.0.0.1:8000/api/empleados
-```
-
-Respuesta esperada:
-
-```json
-{
-  "message": "error en la validacion de los datos",
-  "errors": {
-    "id_cargo": [
-      "The id cargo field is required."
-    ],
-    "apellidos": [
-      "The apellidos field is required."
-    ],
-    "fecha_nacimiento": [
-      "The fecha nacimiento field is required."
-    ],
-    "fecha_ingreso": [
-      "The fecha ingreso field is required."
-    ],
-    "salario": [
-      "The salario field is required."
-    ],
-    "estado": [
-      "The estado field is required."
-    ]
-  },
-  "status": "400"
-}
-```
-
-## Endpoints Principales
-
+Nos lanza este error:
 ```text
-POST   /api/login
-POST   /api/register
-
-GET    /api/empleados
-POST   /api/empleados
-GET    /api/empleados/{empleado}
-PUT    /api/empleados/{empleado}
-DELETE /api/empleados/{empleado}
-
-GET    /api/cargos
-POST   /api/cargos
-PUT    /api/cargos/{cargo}
-DELETE /api/cargos/{cargo}
-
-GET    /api/funcionesCargo
-POST   /api/funcionesCargo
-PUT    /api/funcionesCargo/{funcionesCargo}
-DELETE /api/funcionesCargo/{funcionesCargo}
+{
+    "message": "Unauthenticated."
+}
 ```
-
-## Recomendación para la Evidencia
-
-Para documentar la evidencia solicitada, se recomienda ejecutar y capturar:
-
-- Login y generación del token.
-- Lista de empleados.
-- Lista de cargos.
-- Lista de funciones de cargo.
-- Creación de cargo.
-- Creación de función asociada a un cargo.
-- Creación de empleado asociado a un cargo.
-- Detalle de empleado con cargo, salario y funciones.
-- Actualización de empleado.
-- Eliminación de empleado.
-- Intento de consulta sin token.
-- Intento de creación con datos incompletos para mostrar validaciones.
+7. Sin las validaciones de backend:
+```bash
+curl -X POST -H 'Accept: application/json' -H 'Authorization: Bearer 2|rcQgYGXkcXdb2TepG7e76zpZvBToGnbazuEy99Id4f62a6c1' -d '{"nombres":"Juan"}' http://127.0.0.1:8000/api/empleados
+```
+Nos lanza el siguiente error:
+```bash
+{"message":"error en la validacion de los datos","errors":{"id_cargo":["The id cargo field is required."],"nombres":["The nombres field is required."],"apellidos":["The apellidos field is required."],"fecha_nacimiento":["The fecha nacimiento field is required."],"fecha_ingreso":["The fecha ingreso field is required."],"salario":["The salario field is required."],"estado":["The estado field is required."]},"status":"400"}
 ```
