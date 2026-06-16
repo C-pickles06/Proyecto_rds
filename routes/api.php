@@ -13,7 +13,8 @@ Route::get('/user', function (Request $request) {
 
 
 Route::post('/login', [UserController::class, 'login']);
-Route::post('register', [UserController::class, 'store']);
+Route::post('/register', [UserController::class, 'store']);
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/empleados', [EmpleadoController::class, 'index']);
@@ -38,3 +39,4 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 });
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');

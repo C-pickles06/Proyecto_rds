@@ -23,6 +23,7 @@ class UserController extends Controller
         }
         return response()->json('Error credenciales incorrectas',400);
     }
+    
     public function store(Request $request){
         $validator = validator::make($request->all(),[
             'name'=>'required',
@@ -44,5 +45,9 @@ class UserController extends Controller
         ]);
         $token = $user->createToken('llave')->plainTextToken;
         return response()->json($token);
+    }
+    public function logout(Request $request){
+        $request->user()->currentAccessToken()->delete();
+        return response()->json('sesion cerrada');
     }
 }
