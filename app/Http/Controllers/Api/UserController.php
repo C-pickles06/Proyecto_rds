@@ -23,8 +23,15 @@ class UserController extends Controller
         }
         return response()->json('Error credenciales incorrectas',400);
     }
-    
+
     public function store(Request $request){
+        $existeUsuario = User::where('email', $request->email)->exists();
+    if ($existeUsuario) {
+        return response()->json([
+            'message' => 'El usuario ya se encuentra registrado',
+            'status' => 400
+        ], 400);
+    }
         $validator = validator::make($request->all(),[
             'name'=>'required',
             'email'=>'required',
@@ -43,9 +50,8 @@ class UserController extends Controller
             'email'=>$request->email,
             'password'=>bcrypt($request->password)
         ]);
-        $token = $user->createToken('llave')->plainTextToken;
-        return response()->json($token);
-    }
+
+    } 
     public function logout(Request $request){
         $request->user()->currentAccessToken()->delete();
         return response()->json('sesion cerrada');
