@@ -45,6 +45,16 @@ class FuncionesCargoController extends Controller
             ];
             return response()->json($data,400);
         }
+        $existeFuncion = FuncionesCargo::where('descripcion_funcion', $request->descripcion_funcion)
+        ->where('id_cargo', $request->id_cargo)
+        ->exists();
+
+    if ($existeFuncion) {
+        return response()->json([
+            'message' => 'La funcion ya se encuentra registrada',
+            'status' => 400
+        ], 400);
+    }
         $funcionesCargo=FuncionesCargo::create([
             'descripcion_funcion'=>$request->descripcion_funcion,
             'estado'=>$request->estado,

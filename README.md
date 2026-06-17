@@ -162,3 +162,29 @@ Nos lanza el siguiente error:
 ```bash
 {"message":"error en la validacion de los datos","errors":{"id_cargo":["The id cargo field is required."],"nombres":["The nombres field is required."],"apellidos":["The apellidos field is required."],"fecha_nacimiento":["The fecha nacimiento field is required."],"fecha_ingreso":["The fecha ingreso field is required."],"salario":["The salario field is required."],"estado":["The estado field is required."]},"status":"400"}
 ```
+
+## Endpoints
+
+## Resumen de endpoints
+
+| Modulo | Metodo | Ruta | Protegida | Descripcion |
+| --- | --- | --- | --- | --- |
+| Auth | POST | `/api/register` | No | Registrar usuario y generar token |
+| Auth | POST | `/api/login` | No | Iniciar sesion y generar token |
+| Auth | POST | `/api/logout` | Si | Cerrar sesion y eliminar token actual |
+| Empleados | GET | `/api/empleados` | Si | Listar empleados |
+| Empleados | POST | `/api/empleados` | Si | Crear empleado |
+| Empleados | GET | `/api/empleados/{id}` | Si | detalle empleado |
+| Empleados | PUT/PATCH | `/api/empleados/{id}` | Si | Actualizar empleado |
+| Empleados | DELETE | `/api/empleados/{id}` | Si | Eliminar empleado |
+| Cargos | GET | `/api/cargos` | Si | Listar cargos |
+| Cargos | POST | `/api/cargos` | Si | Crear cargo |
+| Cargos | GET | `/api/cargos/{id}` | Si | Buscar cargo por ID y muestra las funciones |
+| Cargos | PUT/PATCH | `/api/cargos/{id}` | Si | Actualizar cargo |
+| Cargos | DELETE | `/api/cargos/{id}` | Si | Eliminar cargo |
+| Funciones cargo | GET | `/api/funcionCargos` | Si | Listar funciones cargo |
+| Funciones cargo | POST | `/api/funcionCargos` | Si | Crear funcion cargo |
+| Funciones cargo | GET | `/api/funcionCargos/{id}` | Si | Buscar funcion cargo por ID |
+| Funciones cargo | PUT/PATCH | `/api/funcionCargos/{id}` | Si | Actualizar funcion cargo |
+| Funciones cargo | DELETE | `/api/funcionCargos/{id}` | Si | Eliminar funcion cargo |
+---

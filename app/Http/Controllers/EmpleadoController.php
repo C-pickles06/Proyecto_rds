@@ -14,9 +14,9 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-       $empleados=Empleado::all();
+        $empleados = Empleado::all();
 
-       return response()->json($empleados,200);
+        return response()->json($empleados, 200);
     }
 
     /**
@@ -32,8 +32,7 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-       
-       $validator = validator::make($request->all(), [
+        $validator = validator::make($request->all(), [
             'id_cargo' => 'required',
             'nombres' => 'required',
             'apellidos' => 'required',
@@ -41,49 +40,49 @@ class EmpleadoController extends Controller
             'fecha_ingreso' => 'required',
             'salario' => 'required',
             'estado' => 'required',
-       ]);
-       if($validator->fails()){
-        $data=[
-            'message'=>'error en la validacion de los datos',
-            'errors'=>$validator->errors(),
-            'status'=>'400'
-        ];
-        return response()->json($data,400);
-       }
-
-       $existeEmpleado = Empleado::where('nombres', $request->nombres)
-        ->where('apellidos', $request->apellidos)
-        ->where('fecha_nacimiento', $request->fecha_nacimiento)
-        ->exists();
-
-    if ($existeEmpleado) {
-        return response()->json([
-            'message' => 'El empleado ya se encuentra registrado',
-            'status' => 400
-        ], 400);
-    }
-
-       $empleado=Empleado::create([
-            'id_cargo'=>$request->id_cargo,
-            'nombres'=>$request->nombres,
-            'apellidos'=>$request->apellidos,
-            'fecha_nacimiento'=>$request->fecha_nacimiento,
-            'fecha_ingreso'=>$request->fecha_ingreso,
-            'salario'=>$request->salario,
-            'estado'=>$request->estado
         ]);
-       if(!$empleado){
-        $data=[
-        'message'=>'error al crear un empleado',
-        'status'=>500
+        if ($validator->fails()) {
+            $data = [
+                'message' => 'error en la validacion de los datos',
+                'errors' => $validator->errors(),
+                'status' => '400'
+            ];
+            return response()->json($data, 400);
+        }
+
+        $existeEmpleado = Empleado::where('nombres', $request->nombres)
+            ->where('apellidos', $request->apellidos)
+            ->where('fecha_nacimiento', $request->fecha_nacimiento)
+            ->exists();
+
+        if ($existeEmpleado) {
+            return response()->json([
+                'message' => 'El empleado ya se encuentra registrado',
+                'status' => 400
+            ], 400);
+        }
+
+        $empleado = Empleado::create([
+            'id_cargo' => $request->id_cargo,
+            'nombres' => $request->nombres,
+            'apellidos' => $request->apellidos,
+            'fecha_nacimiento' => $request->fecha_nacimiento,
+            'fecha_ingreso' => $request->fecha_ingreso,
+            'salario' => $request->salario,
+            'estado' => $request->estado
+        ]);
+        if (!$empleado) {
+            $data = [
+                'message' => 'error al crear un empleado',
+                'status' => 500
+            ];
+            return response()->json($data, 500);
+        }
+        $data = [
+            'empleado' => $empleado,
+            'status' => 201
         ];
-        return response()->json($data,500);
-       }
-       $data=[
-        'empleado'=>$empleado,
-        'status'=>201
-       ];
-       return response()->json($data,201);
+        return response()->json($data, 201);
     }
 
     /**
@@ -91,15 +90,15 @@ class EmpleadoController extends Controller
      */
     public function show(Empleado $empleado)
     {
-        $empleado ->load('cargo.funcionesCargo');
-        $detalle=[
-            'nombre_empleado'=>$empleado->$empleado . $empleado->apellidos,
-            'cargo_asignado'=>$empleado->cargo ? $empleado->cargo->nombre_cargo : 'Sin cargo',
+        $empleado->load('cargo.funcionesCargo');
+        $detalle = [
+            'nombre_empleado' => $empleado->$empleado . $empleado->apellidos,
+            'cargo_asignado' => $empleado->cargo ? $empleado->cargo->nombre_cargo : 'Sin cargo',
             'salario' => $empleado->salario,
             'funciones' => $empleado->cargo->funcionesCargo ? $empleado->cargo->funcionesCargo : [],
-            
+
         ];
-        return response()->json($detalle,200);
+        return response()->json($detalle, 200);
     }
 
     /**
@@ -115,53 +114,67 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, Empleado $empleado)
     {
-          $validator=validator::make($request->all(),[
-        'id_cargo'=>'required',
-        'nombres'=>'required',
-        'apellidos'=>'required',
-        'fecha_nacimiento'=>'required',
-        'fecha_ingreso'=>'required',
-        'salario'=>'required',
-        'estado'=>'required'
+        $validator = validator::make($request->all(), [
+            'id_cargo' => 'required',
+            'nombres' => 'required',
+            'apellidos' => 'required',
+            'fecha_nacimiento' => 'required',
+            'fecha_ingreso' => 'required',
+            'salario' => 'required',
+            'estado' => 'required'
 
-       ]);
-       if($validator->fails()){
-        $data=[
-            'message'=>'error en la validacion de los datos',
-            'errors'=>$validator->errors(),
-            'estatus'=>'400'
+        ]);
+        if ($validator->fails()) {
+            $data = [
+                'message' => 'error en la validacion de los datos',
+                'errors' => $validator->errors(),
+                'estatus' => '400'
+            ];
+            return response()->json($data, 400);
+        }
+        $empleado->update([
+            'id_cargo' => $request->id_cargo,
+            'nombres' => $request->nombres,
+            'apellidos' => $request->apellidos,
+            'fecha_nacimiento' => $request->fecha_nacimiento,
+            'fecha_ingreso' => $request->fecha_ingreso,
+            'salario' => $request->salario,
+            'estado' => $request->estado
+        ]);
+        if (!$empleado) {
+            $data = [
+                'message' => 'erro al crear un empleado',
+                'status' => 500
+            ];
+            return response()->json($data, 500);
+        }
+        $data = [
+            'empleado' => $empleado,
+            'status' => 201
         ];
-        return response()->json($data,400);
-       }
-       $empleado->update([
-        'id_cargo'=>$request->id_cargo,
-        'nombres'=>$request->nombres,
-        'apellidos'=>$request->apellidos,
-        'fecha_nacimiento'=>$request->fecha_nacimiento,
-        'fecha_ingreso'=>$request->fecha_ingreso,
-        'salario'=>$request->salario,
-        'estado'=>$request->estado
-       ]);
-       if(!$empleado){
-        $data=[
-        'message'=>'erro al crear un empleado',
-        'status'=>500
-        ];
-        return response()->json($data,500);
-       }
-       $data=[
-        'empleado'=>$empleado,
-        'status'=>201
-       ];
-       return response()->json($data,201);
+        return response()->json($data, 201);
     }
-
+    public function detalle_empleado($id){
+        $empleado = Empleado::with([
+            'cargo',
+            'cargo.funcionesCargo',
+        ])->find($id);
+        if (!$empleado) {
+            return response()->json(['message' => 'Empleado no encontrado'], 404);
+        }
+        return response()->json([
+            'empleado' => $empleado->nombre.' '.$empleado->apellido,
+            'cargo' => $empleado->cargo->nombre_cargo,
+            'salario' => $empleado->salario,
+            'funciones' => $empleado->cargo->funcioCargo->pluck('descripcion_funcion'),
+        ]);
+    }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Empleado $empleado)
     {
         $empleado->delete();
-        return response()->json(['message'=>'eliminado con exito',200]);
+        return response()->json(['message' => 'eliminado con exito', 200]);
     }
 }

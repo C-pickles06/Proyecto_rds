@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cargo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Models\FuncionesCargo;
 
 class CargoController extends Controller
 {
@@ -30,6 +31,13 @@ class CargoController extends Controller
      */
     public function store(Request $request)
     {
+        $existeCargo = Cargo::where('nombre_cargo', $request->nombre_cargo)->exists();
+        if ($existeCargo) {
+            return response()->json([
+                'message' => 'El cargo ya se encuentra registrado',
+                'status' => 400
+            ], 400);
+        }
         $validator = validator::make($request->all(),[
             'nombre_cargo'=>'required',
             'descripcion'=>'required',
@@ -65,7 +73,22 @@ class CargoController extends Controller
      */
     public function show(Cargo $cargo)
     {
-        //
+        $detalleCargo=[
+            'nombre'=>$cargo->nombre_cargo,
+            'descripcion'=>$cargo->descripcion,
+            'funciones'=>$cargo->funcionesCargo,
+        ];
+        return response()->json($detalleCargo,200);
+    }
+
+    
+    public function funciones(Cargo $cargo)
+    {
+        return response()->json([
+            'cargo' => $cargo->nombre_cargo,
+            'funciones'=> $cargo->funcionesCargo
+        ], 200);
+        
     }
 
     /**
