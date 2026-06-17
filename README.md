@@ -187,4 +187,5 @@ Nos lanza el siguiente error:
 | Funciones cargo | GET | `/api/funcionCargos/{id}` | Si | Buscar funcion cargo por ID |
 | Funciones cargo | PUT/PATCH | `/api/funcionCargos/{id}` | Si | Actualizar funcion cargo |
 | Funciones cargo | DELETE | `/api/funcionCargos/{id}` | Si | Eliminar funcion cargo |
+| Cerrar sesion | POST | `/api/logout` | Si | Cerrar sesion |
 ---
