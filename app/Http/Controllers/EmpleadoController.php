@@ -174,7 +174,11 @@ class EmpleadoController extends Controller
      */
     public function destroy(Empleado $empleado)
     {
-        $empleado->delete();
+        if(!isset($empleado)){
+            return response()->json(['message' => 'Empleado no encontrado'], 404);
+        }else{
+            $empleado->delete();
         return response()->json(['message' => 'eliminado con exito', 200]);
+        }
     }
 }

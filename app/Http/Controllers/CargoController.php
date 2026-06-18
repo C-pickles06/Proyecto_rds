@@ -139,10 +139,11 @@ class CargoController extends Controller
      */
     public function destroy(Cargo $cargo)
     {
-        if(!$cargo){
+        if(!isset($cargo)){
             return response()->json(['message'=>'cargo no encontrado',404]);
+        }else{
+            $cargo->delete();
+            return response()->json(['message'=>'eliminado con exito',200]);
         }
-        $cargo->delete();
-        return response()->json(['message'=>'eliminado con exito',200]);
     }
 }
