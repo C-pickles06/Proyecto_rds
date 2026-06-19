@@ -174,17 +174,17 @@ Nos lanza el siguiente error:
 | Auth | POST | `/api/logout` | Si | Cerrar sesion y eliminar token actual |
 | Empleados | GET | `/api/empleados` | Si | Listar empleados |
 | Empleados | POST | `/api/empleados` | Si | Crear empleado |
-| Empleados | GET | `/api/empleados/{id}` | Si | detalle empleado |
-| Empleados | PUT/PATCH | `/api/empleados/{id}` | Si | Actualizar empleado |
-| Empleados | DELETE | `/api/empleados/{id}` | Si | Eliminar empleado |
+| Empleados | GET | `/api/empleados/{empleado}` | Si | detalle empleado |
+| Empleados | PUT/PATCH | `/api/empleados/{empleado}` | Si | Actualizar empleado |
+| Empleados | DELETE | `/api/empleados/{empleado}` | Si | Eliminar empleado |
 | Cargos | GET | `/api/cargos` | Si | Listar cargos |
 | Cargos | POST | `/api/cargos` | Si | Crear cargo |
-| Cargos | GET | `/api/cargos/{id}` | Si | Buscar cargo por ID y muestra las funciones |
-| Cargos | PUT/PATCH | `/api/cargos/{id}` | Si | Actualizar cargo |
-| Cargos | DELETE | `/api/cargos/{id}` | Si | Eliminar cargo |
-| Funciones cargo | GET | `/api/funcionCargos` | Si | Listar funciones cargo |
-| Funciones cargo | POST | `/api/funcionCargos` | Si | Crear funcion cargo |
-| Funciones cargo | GET | `/api/funcionCargos/{id}` | Si | Buscar funcion cargo por ID |
-| Funciones cargo | PUT/PATCH | `/api/funcionCargos/{id}` | Si | Actualizar funcion cargo |
-| Funciones cargo | DELETE | `/api/funcionCargos/{id}` | Si | Eliminar funcion cargo |
+| Cargos | GET | `/api/cargos/{cargo}` | Si | Buscar cargo por ID y muestra las funciones |
+| Cargos | PUT/PATCH | `/api/cargos/{cargo}` | Si | Actualizar cargo |
+| Cargos | DELETE | `/api/cargos/{cargo}` | Si | Eliminar cargo |
+| Funciones cargo | GET | `/api/funcionesCargo` | Si | Listar funciones cargo |
+| Funciones cargo | POST | `/api/funcionesCargo` | Si | Crear funcion cargo |
+| Funciones cargo | GET | `/api/funcionesCargo/{funcionesCargo}` | Si | Buscar funcion cargo por ID |
+| Funciones cargo | PUT/PATCH | `/api/funcionesCargo/{funcionesCargo}` | Si | Actualizar funcion cargo |
+| Funciones cargo | DELETE | `/api/funcionesCargo/{funcionesCargo}` | Si | Eliminar funcion cargo |  
 ---
