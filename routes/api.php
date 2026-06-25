@@ -22,7 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/empleados', [EmpleadoController::class, 'store']);
     Route::get('/empleados/{empleado}', [EmpleadoController::class, 'show']);
     Route::put('/empleados/{empleado}', [EmpleadoController::class, 'update']);
-    Route::delete('/empleados/{empleado}', [EmpleadoController::class, 'destroy']);
+    Route::delete('/empleados/{id}', [EmpleadoController::class, 'destroy']);
 
     Route::get('/empleados/detalle/{id}', [EmpleadoController::class, 'detalle_empleado']);
 
@@ -36,7 +36,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/funcionesCargo',[FuncionesCargoController::class, 'store']);
     Route::get('/funcionesCargo/{funcionesCargo}',[FuncionesCargoController::class, 'show']);
     Route::put('/funcionesCargo/{funcionesCargo}',[FuncionesCargoController::class, 'update']);
-    Route::delete('/funcionesCargo/{funcionesCargo}',[FuncionesCargoController::class, 'destroy']);
+    Route::delete('/funcionesCargo/{id}',[FuncionesCargoController::class, 'destroy']);
 
     Route::get('/cargos/{cargo}/funciones', [CargoController::class, 'funciones']);
 

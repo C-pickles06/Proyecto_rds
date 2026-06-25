@@ -14,7 +14,7 @@ class CargoController extends Controller
      */
     public function index()
     {
-        $cargo = Cargo::all();
+        $cargo = Cargo::with('funcionesCargo')->paginate(10);
         return response()->json($cargo,200);
     }
 
@@ -137,9 +137,12 @@ class CargoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Cargo $cargo)
+    public function destroy($id)
     {
-        
+        $cargo = Cargo::find($id);
+        if(!$cargo){
+            return response()->json(['message'=>'Cargo no encontrado'],400);
+        }
         $cargo->delete();
         return response()->json(['message'=>'eliminado con exito',200]);
     }

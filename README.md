@@ -186,5 +186,5 @@ Nos lanza el siguiente error:
 | Funciones cargo | POST | `/api/funcionesCargo` | Si | Crear funcion cargo |
 | Funciones cargo | GET | `/api/funcionesCargo/{funcionesCargo}` | Si | Buscar funcion cargo por ID |
 | Funciones cargo | PUT/PATCH | `/api/funcionesCargo/{funcionesCargo}` | Si | Actualizar funcion cargo |
-| Funciones cargo | DELETE | `/api/funcionesCargo/{funcionesCargo}` | Si | Eliminar funcion cargo |  
+| Funciones cargo | DELETE | `/api/funcionesCargo/{id}` | Si | Eliminar funcion cargo |  
 ---

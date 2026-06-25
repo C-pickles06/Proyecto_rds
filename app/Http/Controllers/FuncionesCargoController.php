@@ -14,7 +14,7 @@ class FuncionesCargoController extends Controller
      */
     public function index()
     {
-        $funcionesCargo = FuncionesCargo::all();
+        $funcionesCargo = FuncionesCargo::with('funcionesCargo')->paginate(10);
 
         return response()->json($funcionesCargo,200);
     }
@@ -128,8 +128,12 @@ class FuncionesCargoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FuncionesCargo $funcionesCargo)
+    public function destroy($id)
     {
+        $funcionesCargo=funcionesCargo::find($id);
+        if(!$funcionesCargo){
+            return response()->json(['message'=>'Funcion no encontrada'],404);
+        }
         $funcionesCargo->delete();
         return response()->json(['message'=>'eliminado con exito'],200);
     }
