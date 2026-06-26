@@ -81,14 +81,14 @@ class CargoController extends Controller
         return response()->json($detalleCargo,200);
     }
 
-    
+
     public function funciones(Cargo $cargo)
     {
         return response()->json([
             'cargo' => $cargo->nombre_cargo,
             'funciones'=> $cargo->funcionesCargo
         ], 200);
-        
+
     }
 
     /**
@@ -139,11 +139,20 @@ class CargoController extends Controller
      */
     public function destroy($id)
     {
+<<<<<<< HEAD
         $cargo = Cargo::find($id);
         if(!$cargo){
             return response()->json(['message'=>'Cargo no encontrado'],400);
         }
         $cargo->delete();
         return response()->json(['message'=>'eliminado con exito',200]);
+=======
+        if(!isset($cargo)){
+            return response()->json(['message'=>'cargo no encontrado',404]);
+        }else{
+            $cargo->delete();
+            return response()->json(['message'=>'eliminado con exito',200]);
+        }
+>>>>>>> 291abcf5e16ea6742915a24d2ddd68e7685eef3f
     }
 }

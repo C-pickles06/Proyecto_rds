@@ -174,11 +174,19 @@ class EmpleadoController extends Controller
      */
     public function destroy($id)
     {
+<<<<<<< HEAD
         $empleado = Empleado::find($id);
         if(!$empleado){
             return response()->json(['message' => 'Empleado no encontrado'], 404);
         }
         $empleado ->delete();
+=======
+        if(!isset($empleado)){
+            return response()->json(['message' => 'Empleado no encontrado'], 404);
+        }else{
+            $empleado->delete();
+>>>>>>> 291abcf5e16ea6742915a24d2ddd68e7685eef3f
         return response()->json(['message' => 'eliminado con exito', 200]);
+        }
     }
 }
