@@ -11,8 +11,6 @@ class Cargo extends Model
     /** @use HasFactory<\Database\Factories\CargoFactory> */
     use HasFactory;
     protected $fillable = [
-        'nombre_cargo',
-        'descripcion',
     ];
     public function empleados(): HasMany
     {
